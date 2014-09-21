@@ -2,24 +2,31 @@ var ckanEndpoint = 'http://localhost:5000';
 var valuesResourceId = '8b9a25aa-0b79-4aef-9c39-00418935bc37';
 var Data = {
   cache: {},
+  // country codes keyed by 3-digit iso
+  countryCodes: {},
+  // keyed by id
+  indicators: {},
+  // data for internal recline dataset we use to show results
   rawDataset: {
     fields: [
-      { id: 'year', type: 'number' }
+      { id: 'year', type: 'date' }
     ],
     records: []
   }
 };
 
 jQuery(document).ready(function($) {
+  // WEO starts in 1980 and current runs until 2019
   for(var xx=0; xx<40; xx++) {
     Data.rawDataset.records.push({year: 1980+xx});
   }
-  setup(function() {
+
+  loadSetupData(function() {
     $('.chosen-select').chosen();
     $('form').submit(onAdd);
-    // WEO starts in 1980 and current runs until 2019
+
+    addSeries({Indicator: 'LUR', Country: 'GBR'});
   });
-  addSeries({Indicator: 'LUR', Country: 'GBR'});
 });
 
 function onAdd(e) {
@@ -46,8 +53,10 @@ function addSeries(series) {
     }
     Data.cache[series.Indicator][series.Country] = data;
 
-    var fieldId = series.Indicator + '::' + series.Country;
-    Data.rawDataset.fields.push({id: fieldId, type: 'number'});
+    var fieldId = series.Indicator + '/' + series.Country
+      fieldLabel = Data.indicators[series.Indicator].title + ' / ' + Data.countryCodes[series.Country]
+      ;
+    Data.rawDataset.fields.push({id: fieldId, label: fieldLabel, type: 'number'});
     _.each(data, function(row) {
       var idx = row.Year - 1980;
       Data.rawDataset.records[idx][fieldId] = row.Value;
@@ -87,7 +96,7 @@ var render = function() {
   graph.redraw();
 }
 
-var setup = function(cb) {
+var loadSetupData = function(cb) {
   var countryCodes = 'http://data.okfn.org/data/core/country-codes/r/country-codes.json'
     , indicators = 'http://data.okfn.org/data/core/imf-weo/r/indicators.json'
     ;
@@ -101,6 +110,7 @@ var setup = function(cb) {
   $.getJSON(countryCodes, function(data) {
     var $select = $('select[name="country"]');
     _.each(data, function(country) {
+      Data.countryCodes[country['ISO3166-1-Alpha-3']] = country.name;
       var $option = $('<option />')
         .attr('value', country['ISO3166-1-Alpha-3'])
         .text(country.name)
@@ -112,7 +122,7 @@ var setup = function(cb) {
 
   $.getJSON(indicators, function(data) {
     var $select = $('select[name="indicator"]');
-    Data.indicators = data;
+    Data.indicators = _.object(_.pluck(data, 'id'), data);
     _.each(data, function(ind) {
       var $option = $('<option />')
         .attr('value', ind.id)

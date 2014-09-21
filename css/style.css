@@ -4,3 +4,11 @@
   font-size: 10px;
 }
 
+.chosen-container-single .chosen-single {
+  height: 34px;
+  padding-top: 4px;
+}
+
+.chosen-container-single .chosen-single div {
+  top: 5px;
+}
