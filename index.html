@@ -78,7 +78,17 @@
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- fix for issues with slickgrid and jquery >= 1.9
+      See https://github.com/mleibman/SlickGrid/issues/518
+      -->
+    <script type="text/javascript">
+      jQuery.browser = {};
+      jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+      jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+      jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+      jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+    </script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script src="vendor/chosen/chosen.jquery.js"></script>
