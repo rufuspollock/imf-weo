@@ -6,6 +6,14 @@ Package][imf-wp].
 [ds]: http://ckan.org/
 [imf-wp]: http://data.okfn.org/data/core/imf-weo
 
+Specific data used:
+
+* IMF WEO Values get loaded via the [DataStore API for the values table on the DataHub.io][values]
+* Indicators list loaded from IMF WEO on data.okfn.org API - <http://data.okfn.org/data/core/imf-weo>
+* Country list with 3-digit ISO codes via the data.okfn.org - <http://data.okfn.org/data/core/country-codes>
+
+[values]: http://datahub.io/dataset/imf-weo/resource/24cd8ebe-fa3f-4353-9ad9-d53bd88751a6
+
 ----
 
 ## User Stories
