@@ -2,6 +2,7 @@
   height: 400px;
   font-family: Arial;
   font-size: 10px;
+  display: none;
 }
 
 .chosen-container-single .chosen-single {
