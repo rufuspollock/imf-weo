@@ -1,6 +1,6 @@
 // var ckanEndpoint = 'http://localhost:5000';
 // var valuesResourceId = '8b9a25aa-0b79-4aef-9c39-00418935bc37';
-var ckanEndpoint = 'http://datahub.io'
+var ckanEndpoint = 'https://datahub.io'
   , valuesResourceId = '24cd8ebe-fa3f-4353-9ad9-d53bd88751a6'
   ;
 
