@@ -1,6 +1,6 @@
 // var ckanEndpoint = 'http://localhost:5000';
 // var valuesResourceId = '8b9a25aa-0b79-4aef-9c39-00418935bc37';
-var ckanEndpoint = 'https://datahub.io'
+var ckanEndpoint = 'https://old.datahub.io'
   , valuesResourceId = '24cd8ebe-fa3f-4353-9ad9-d53bd88751a6'
   ;
 
@@ -101,8 +101,8 @@ var render = function() {
 }
 
 var loadSetupData = function(cb) {
-  var countryCodes = 'http://data.okfn.org/data/core/country-codes/r/country-codes.json'
-    , indicators = 'http://data.okfn.org/data/core/imf-weo/r/indicators.json'
+  var countryCodes = 'https://data.okfn.org/data/core/country-codes/r/country-codes.json'
+    , indicators = 'https://data.okfn.org/data/core/imf-weo/r/indicators.json'
     ;
 
   var count = 0;
